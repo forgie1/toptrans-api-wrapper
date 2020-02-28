@@ -62,5 +62,4 @@ class PackResponse extends Pack
 		return $this;
 	}
 
-
 }

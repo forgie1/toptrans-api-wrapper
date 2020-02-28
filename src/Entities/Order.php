@@ -27,8 +27,8 @@ class Order
 
 	const DELIVERY_NOTE_BACK_NO = 0; // <-- DEFAULT
 	const DELIVERY_NOTE_BACK_ELECTRONIC = 1; //Elektronicky
-	const DELIVERY_NOTE_BACK_PAPER =2; //Fyzicky
-	const DELIVERY_NOTE_BACK_BOTH =2; //Fyzicky + Elektronicky
+	const DELIVERY_NOTE_BACK_PAPER = 2; //Fyzicky
+	const DELIVERY_NOTE_BACK_BOTH = 3; //Fyzicky + Elektronicky
 
 	const LOADING_COMFORT = 1; //Comfort nakládka - Ne <-- DEFAULT
 	const LOADING_TOP_COMFORT = 2; //Top Comfort
@@ -431,7 +431,7 @@ class Order
 	 */
 	public function setLoadingSelect(?int $loadingSelect)
 	{
-		if ($loadingSelect && !in_array(self::LOADING_SELECT_PREDEFINED_SENDER, self::LOADING_SELECT_OTHER_ADDRESS, self::LOADING_SELECT_PERSONAL)) {
+		if ($loadingSelect && !in_array(self::LOADING_SELECT_PREDEFINED_SENDER, [self::LOADING_SELECT_OTHER_ADDRESS, self::LOADING_SELECT_PERSONAL])) {
 			throw new InvalidArgumentException('Unknown Loading Select ID' . $this->loadingSelect);
 		}
 
@@ -1311,7 +1311,7 @@ class Order
 	public function addAdr(Adr $adr)
 	{
 		$this->adrs[] = $adr;
-		return$this;
+		return $this;
 	}
 
 	private function validateTime($time)

@@ -7,8 +7,7 @@
 
 namespace ToptransApiWrapper\Entities;
 
-use http\Exception\InvalidArgumentException;
-use function Sodium\add;
+use ToptransApiWrapper\Exceptions\InvalidArgumentException;
 
 class Partner
 {
@@ -39,6 +38,7 @@ class Partner
 
 	/**
 	 * @return string
+	 * @throws InvalidArgumentException
 	 */
 	public function getName(): string
 	{
@@ -169,6 +169,7 @@ class Partner
 
 	/**
 	 * @return Address
+	 * @throws InvalidArgumentException
 	 */
 	public function getAddress(): Address
 	{
@@ -188,7 +189,5 @@ class Partner
 		$this->address = $address;
 		return $this;
 	}
-
-
 
 }

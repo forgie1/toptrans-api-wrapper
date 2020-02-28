@@ -1,0 +1,27 @@
+{
+	"name": "forgie1/toptrans-api-wrapper",
+	"description": "Toptrans API wrapper",
+	"homepage": "http://www.artweby.cz",
+	"type": "project",
+	"license": "MIT",
+	"authors": [
+		{
+			"name": "Ján Forgáč",
+			"email": "forgac@artfocus.cz"
+		}
+	],
+	"require": {
+		"php": ">=7.2",
+		"guzzlehttp/guzzle": "^6.1"
+	},
+	"require-dev": {
+		"phpunit/phpunit": "^6.0",
+		"artfocus/codestyle": "6.0.*",
+		"phpstan/phpstan": "0.7.*"
+	},
+	"autoload": {
+		"psr-4": {
+			"ToptransApiWrapper\\": "src/"
+		}
+	}
+}

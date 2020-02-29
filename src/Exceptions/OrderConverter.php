@@ -31,20 +31,24 @@ class OrderConverter
 
 	private static function parseValue($nestedMethods, $object)
 	{
-		$methodValue = array_shift($nestedMethods);
-		$method = 'get' . ucfirst($methodValue);
+		$jsonApiKey = array_shift($nestedMethods);
+		$realMethod = '';
+		foreach (explode('_', $jsonApiKey) as $word) {
+			$realMethod .= ucfirst($word);
+		}
+		$method = 'get' . $realMethod;
 		$value = $object->$method();
 
 		if (is_object($value)) {
-			$result[$methodValue] = self::parseValue($nestedMethods, $value);
+			$result[$jsonApiKey] = self::parseValue($nestedMethods, $value);
 			return $result;
 		} elseif (is_array($value)) {
 			while ($subValue = array_shift($value)) {
-				$result[][$methodValue] = self::parseValue($nestedMethods, $subValue);
+				$result[][$jsonApiKey] = self::parseValue($nestedMethods, $subValue);
 			}
 			return $result;
 		} else {
-			$result[$methodValue] = $value;
+			$result[$jsonApiKey] = $value;
 			return $result;
 		}
 	}

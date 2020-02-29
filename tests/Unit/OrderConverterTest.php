@@ -71,12 +71,12 @@ class OrderConverterTest extends TestCase
 
 	public function testParseValue4()
 	{
-		$nestedMethods = ['first3.second3.third.fourth', 'second.third.fourth', 'third.fourth'];
+		$nestedMethods = ['first3.second_third.third.fourth', 'second.third.fourth', 'third.fourth'];
 		$root = new TestObjects\Root3();
 		$this->assertSame([
 			0 => [
 				'first3' => [
-					'second3' => [
+					'second_third' => [
 						0 => [
 							'third' => [
 								'fourth' => true,
@@ -92,7 +92,7 @@ class OrderConverterTest extends TestCase
 			],
 			1 => [
 				'first3' => [
-					'second3' => [
+					'second_third' => [
 						0 => [
 							'third' => [
 								'fourth' => true,
@@ -108,7 +108,7 @@ class OrderConverterTest extends TestCase
 			],
 			2 => [
 				'first3' => [
-					'second3' => [
+					'second_third' => [
 						0 => [
 							'third' => [
 								'fourth' => true,

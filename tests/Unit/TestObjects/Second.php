@@ -10,6 +10,7 @@ namespace Tests\Unit\TestObjects;
 class Second
 {
 
+	/** @var Third */
 	private $third;
 
 	public function __construct()

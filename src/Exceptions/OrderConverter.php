@@ -29,17 +29,22 @@ class OrderConverter
 	}
 
 
-	private static function parseValue($nestedMethods, $object, $result = [])
+	private static function parseValue($nestedMethods, $object)
 	{
 		$methodValue = array_shift($nestedMethods);
 		$method = 'get' . ucfirst($methodValue);
-		$object = $object->$method();
+		$value = $object->$method();
 
-		if (!is_object($object)) {
-			$result[$methodValue] = $object;
+		if (is_object($value)) {
+			$result[$methodValue] = self::parseValue($nestedMethods, $value);
+			return $result;
+		} elseif (is_array($value)) {
+			while ($subValue = array_shift($value)) {
+				$result[][$methodValue] = self::parseValue($nestedMethods, $subValue);
+			}
 			return $result;
 		} else {
-			$result[$methodValue] = self::parseValue($nestedMethods, $object, $result);
+			$result[$methodValue] = $value;
 			return $result;
 		}
 	}

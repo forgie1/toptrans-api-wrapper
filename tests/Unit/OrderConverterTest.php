@@ -44,4 +44,88 @@ class OrderConverterTest extends TestCase
 		], OrderConverter::orderToArray($root, $nestedMethods));
 	}
 
+	public function testParseValue3()
+	{
+		$nestedMethods = ['second.third.fourth', 'third.fourth'];
+		$root = new TestObjects\Root3();
+		$this->assertSame([
+			0 => [
+				'second' => [
+					'third' => [
+						'fourth' => true,
+					],
+				],
+			],
+			1 => [
+				'second' => [
+					'third' => [
+						'fourth' => true,
+					],
+				],
+			],
+			'third' => [
+				'fourth' => true,
+			],
+		], OrderConverter::orderToArray($root, $nestedMethods));
+	}
+
+	public function testParseValue4()
+	{
+		$nestedMethods = ['first3.second3.third.fourth', 'second.third.fourth', 'third.fourth'];
+		$root = new TestObjects\Root3();
+		$this->assertSame([
+			0 => [
+				'first3' => [
+					'second3' => [
+						0 => [
+							'third' => [
+								'fourth' => true,
+							],
+						],
+						1 => [
+							'third' => [
+								'fourth' => true,
+							],
+						],
+					],
+				],
+			],
+			1 => [
+				'first3' => [
+					'second3' => [
+						0 => [
+							'third' => [
+								'fourth' => true,
+							],
+						],
+						1 => [
+							'third' => [
+								'fourth' => true,
+							],
+						],
+					],
+				],
+			],
+			2 => [
+				'first3' => [
+					'second3' => [
+						0 => [
+							'third' => [
+								'fourth' => true,
+							],
+						],
+						1 => [
+							'third' => [
+								'fourth' => true,
+							],
+						],
+					],
+				],
+			],
+			'third' => [
+				'fourth' => true,
+			],
+		], OrderConverter::orderToArray($root, $nestedMethods));
+	}
+
 }

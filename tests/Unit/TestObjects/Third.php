@@ -15,4 +15,19 @@ class Third
 		return true;
 	}
 
+	public function getNull()
+	{
+		return null;
+	}
+
+	public function getNullArray()
+	{
+		return [];
+	}
+
+	public function getValueArray()
+	{
+		return [1, 3, 5, 7];
+	}
+
 }

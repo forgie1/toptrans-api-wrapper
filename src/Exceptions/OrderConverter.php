@@ -22,15 +22,17 @@ class OrderConverter
 		$arrayOrder = [];
 		foreach ($allowedParameters as $parameter) {
 			$nestedMethods = explode('.', $parameter);
-			$arrayOrder += self::parseValue($nestedMethods, $order);
+			$arrayOrder = array_merge_recursive($arrayOrder, self::parseValues($nestedMethods, $order));
 		}
 
 		return $arrayOrder;
 	}
 
 
-	private static function parseValue($nestedMethods, $object)
+	private static function parseValues($nestedMethods, $object): array
 	{
+		$result = [];
+
 		$jsonApiKey = array_shift($nestedMethods);
 		$realMethod = '';
 		foreach (explode('_', $jsonApiKey) as $word) {
@@ -40,15 +42,27 @@ class OrderConverter
 		$value = $object->$method();
 
 		if (is_object($value)) {
-			$result[$jsonApiKey] = self::parseValue($nestedMethods, $value);
+			$newVal = self::parseValues($nestedMethods, $value);
+			if ($newVal) {
+				$result[$jsonApiKey] = self::parseValues($nestedMethods, $value);
+			}
 			return $result;
 		} elseif (is_array($value)) {
 			while ($subValue = array_shift($value)) {
-				$result[][$jsonApiKey] = self::parseValue($nestedMethods, $subValue);
+				if (is_object($subValue)) {
+					$newVal = self::parseValues($nestedMethods, $subValue);
+					if ($newVal) {
+						$result[$jsonApiKey][] = $newVal;
+					}
+				} elseif ($subValue) {
+					$result[$jsonApiKey][] = $subValue;
+				}
 			}
 			return $result;
 		} else {
-			$result[$jsonApiKey] = $value;
+			if ($value) {
+				$result[$jsonApiKey] = $value;
+			}
 			return $result;
 		}
 	}

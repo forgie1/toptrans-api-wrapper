@@ -1,0 +1,20 @@
+<?xml version="1.0"?>
+<phpunit
+		bootstrap="tests/bootstrap.php"
+		verbose="true"
+>
+	<!-- tests directories to run -->
+	<testsuites>
+		<testsuite>
+			<directory suffix="Test.php">tests</directory>
+		</testsuite>
+	</testsuites>
+	<!-- source to check coverage for -->
+	<filter>
+		<whitelist>
+			<directory suffix=".php">src</directory>
+			<directory suffix=".php">app</directory>
+			<directory suffix=".php">plugins</directory>
+		</whitelist>
+	</filter>
+</phpunit>

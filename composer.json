@@ -27,7 +27,8 @@
 	},
 	"autoload": {
 		"psr-4": {
-			"ToptransApiWrapper\\": "src/"
+			"ToptransApiWrapper\\": "src/",
+			"Tests\\": "tests/"
 		}
 	}
 }

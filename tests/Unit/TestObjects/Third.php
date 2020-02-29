@@ -15,6 +15,11 @@ class Third
 		return true;
 	}
 
+	public function getZero()
+	{
+		return 0;
+	}
+
 	public function getNull()
 	{
 		return null;

@@ -44,6 +44,32 @@ class OrderConverterTest extends TestCase
 		], OrderConverter::orderToArray($root, $nestedMethods));
 	}
 
+	public function testParseValue2zero()
+	{
+		$nestedMethods = ['first.second.third.fourth', 'first.second.third.zero', 'second.third.fourth',  'second.third.zero', 'third.fourth', 'third.zero'];
+		$root = new TestObjects\Root2();
+		$this->assertSame([
+			'first' => [
+				'second' => [
+					'third' => [
+						'fourth' => true,
+						'zero' => 0,
+					],
+				],
+			],
+			'second' => [
+				'third' => [
+					'fourth' => true,
+					'zero' => 0,
+				],
+			],
+			'third' => [
+				'fourth' => true,
+				'zero' => 0,
+			],
+		], OrderConverter::orderToArray($root, $nestedMethods));
+	}
+
 	public function testParseValue2null()
 	{
 		$nestedMethods = ['first.second.third.fourth', 'second.third.fourth', 'third.fourth', 'third.null', 'third.null_array', 'third.value_array'];

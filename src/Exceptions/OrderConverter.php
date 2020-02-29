@@ -60,7 +60,7 @@ class OrderConverter
 			}
 			return $result;
 		} else {
-			if ($value) {
+			if (isset($value)) {
 				$result[$jsonApiKey] = $value;
 			}
 			return $result;

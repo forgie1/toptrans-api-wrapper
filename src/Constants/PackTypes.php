@@ -7,7 +7,7 @@
 
 namespace ToptransApiWrapper\Constants;
 
-interface PackTypes
+class PackTypes
 {
 
 	const PUL_PALETY = 25;

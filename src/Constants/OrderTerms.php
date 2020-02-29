@@ -7,7 +7,7 @@
 
 namespace ToptransApiWrapper\Constants;
 
-interface OrderTerms
+class OrderTerms
 {
 
 	const STANDARD = 1;
@@ -23,7 +23,7 @@ interface OrderTerms
 		self::TOP_PRIVAT => 'Top Privat',
 		self::TOP_WEEKEND => 'Top Weekend',
 		self::PERSONAL_PICKUP => 'Osobní odběr',
-		self::DELIVERY_AFTER_AVISO => 'Rozvoz po avizaci'
+		self::DELIVERY_AFTER_AVISO => 'Rozvoz po avizaci',
 	];
 
 }

@@ -116,10 +116,10 @@ class Order
 	/** @var bool|null Telefonická avizace nakládky <-- DEFAULT false */
 	private $loadingAviso;
 
-	/** @var bool|null Telefonická avizace vykládky <-- default false */
+	/** @var bool|null Telefonická avizace vykládky <-- DEFAULT false */
 	private $dischargeAviso;
 
-	/** @var int|null Služba Comfort na nakládce (viz číselník) <-- default 1 */
+	/** @var int|null Služba Comfort na nakládce (viz číselník) <-- DEFAULT 1 */
 	private $loadingComfortId;
 
 	/** @var int|null Počet pater na nakládce (pro některé varianty služby Comfort) */
@@ -495,7 +495,7 @@ class Order
 	 */
 	public function setDischargePersonalBranchId(?int $dischargePersonalBranchId)
 	{
-		if ($dischargePersonalBranchId && !array_key_exists($dischargePersonalBranchId, Branches::ALLOWED_BRANCHES)) {
+		if ($dischargePersonalBranchId && !array_key_exists($dischargePersonalBranchId, IBranches::ALLOWED_BRANCHES)) {
 			throw new InvalidArgumentException('Unknown branch ID: ' . $dischargePersonalBranchId);
 		}
 
@@ -1150,7 +1150,7 @@ class Order
 	 */
 	public function getKg(): float
 	{
-		return $this->kg;
+		return round($this->kg, 2);
 	}
 
 	/**

@@ -7,51 +7,22 @@
 
 namespace ToptransApiWrapper\Entities;
 
+use ToptransApiWrapper\Constants\Currencies;
+use ToptransApiWrapper\Constants\DeliveryNoteBackTypes;
+use ToptransApiWrapper\Constants\DischargeComfortTypes;
+use ToptransApiWrapper\Constants\FreightCacheTypes;
+use ToptransApiWrapper\Constants\LoadingComfortTypes;
+use ToptransApiWrapper\Constants\LoadingTypes;
 use ToptransApiWrapper\Constants\Branches;
 use ToptransApiWrapper\Constants\OrderTerms;
+use ToptransApiWrapper\Constants\PayerTypes;
+use ToptransApiWrapper\Constants\ReturnPackTypes;
 use ToptransApiWrapper\Exceptions\InvalidArgumentException;
 
 class Order
 {
 
-	const PAYER_SENDER = '1'; //plátce=příkazce <-- DEFAULT
-	const PAYER_RECEIVER = '2'; //plátce=příjemce
-	const PAYER_ON_PICKUP = '4'; //platba při nakládce,
-	const PAYER_OTHER = '3'; //jiný plátce popis
-
-	const LOADING_SELECT_PREDEFINED_SENDER = 1; //1: adresa objednavatele <-- DEFAULT
-	const LOADING_SELECT_OTHER_ADDRESS = 2; //jiná adresa
-	const LOADING_SELECT_PERSONAL = 3; //osobní podej
-
 	const TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH = 50;
-
-	const DELIVERY_NOTE_BACK_NO = 0; // <-- DEFAULT
-	const DELIVERY_NOTE_BACK_ELECTRONIC = 1; //Elektronicky
-	const DELIVERY_NOTE_BACK_PAPER = 2; //Fyzicky
-	const DELIVERY_NOTE_BACK_BOTH = 3; //Fyzicky + Elektronicky
-
-	const LOADING_COMFORT = 1; //Comfort nakládka - Ne <-- DEFAULT
-	const LOADING_TOP_COMFORT = 2; //Top Comfort
-	const LOADING_TOP_COMFORT_PLUS_2 = 3; //bílá technika;
-	const LOADING_TOP_COMFORT_PLUS_PLUS = 4; //bílá technika - mimo depo
-	const LOADING_TOP_COMFORT_PLUS = 5; //Top comfort Plus
-	const LOADING_COMFORT_EXCLUSIVE = 6; //Comfort Exclusive
-
-	const DISCHARGE_COMFORT = 1; //Comfort nakládka - Ne <-- DEFAULT
-	const DISCHARGE_TOP_COMFORT = 2; //Top Comfort
-	const DISCHARGE_TOP_COMFORT_PLUS = 5; //Top comfort Plus
-	const DISCHARGE_COMFORT_EXCLUSIVE = 6; //Comfort Exclusive
-
-	const RETURN_PACK_NO = 0;
-	const RETURN_PACK_NORMAL = 1;
-	const RETURN_PACK_BIG = 2;
-
-	const FREIGHT_CACHE_NO = 1;
-	const FREIGHT_CACHE_DISCHARGE = 2; // Na vykládce
-	const FREIGHT_CACHE_LOADING = 3; // Při nakládce
-
-	const CURRENCY_CZK = '1';
-	const CURRENCY_EUR = '2';
 
 	/** @var int Termín. Viz číselník termínů */
 	private $termId;
@@ -59,7 +30,7 @@ class Order
 	/** @var string|null OznaČení */
 	private $label;
 
-	/** @var \DateTimeImmutable|null */
+	/** @var \DateTime|null */
 	private $loadingDate;
 
 	/** @var string|null */
@@ -68,7 +39,7 @@ class Order
 	/** @var string|null */
 	private $loadingTimeTo;
 
-	/** @var \DateTimeImmutable|null */
+	/** @var \DateTime|null */
 	private $dischargeDate;
 
 	/** @var string|null */
@@ -209,7 +180,7 @@ class Order
 	/** @var float|null Hodnota zásilky */
 	private $orderValue;
 
-	/** @var float|null Hodnota zásilky - ID měny (viz číselník) */
+	/** @var int|null Hodnota zásilky - ID měny (viz číselník) */
 	private $orderValueCurrencyId;
 
 	/** @var Pack[] Obsah zásilky - kusy */
@@ -260,18 +231,18 @@ class Order
 	}
 
 	/**
-	 * @return \DateTimeImmutable|null
+	 * @return \DateTime|null
 	 */
-	public function getLoadingDate(): ?\DateTimeImmutable
+	public function getLoadingDate(): ?\DateTime
 	{
 		return $this->loadingDate;
 	}
 
 	/**
-	 * @param \DateTimeImmutable|null $loadingDate
+	 * @param \DateTime|null $loadingDate
 	 * @return $this
 	 */
-	public function setLoadingDate(?\DateTimeImmutable $loadingDate)
+	public function setLoadingDate(?\DateTime $loadingDate)
 	{
 		$this->loadingDate = $loadingDate;
 		return $this;
@@ -318,18 +289,18 @@ class Order
 	}
 
 	/**
-	 * @return \DateTimeImmutable|null
+	 * @return \DateTime|null
 	 */
-	public function getDischargeDate(): ?\DateTimeImmutable
+	public function getDischargeDate(): ?\DateTime
 	{
 		return $this->dischargeDate;
 	}
 
 	/**
-	 * @param \DateTimeImmutable|null $dischargeDate
+	 * @param \DateTime|null $dischargeDate
 	 * @return $this
 	 */
-	public function setDischargeDate(?\DateTimeImmutable $dischargeDate)
+	public function setDischargeDate(?\DateTime $dischargeDate)
 	{
 		$this->dischargeDate = $dischargeDate;
 		return $this;
@@ -390,7 +361,7 @@ class Order
 	 */
 	public function setPayerSelect(?int $payerSelect)
 	{
-		if ($payerSelect && !in_array($payerSelect, [self::PAYER_SENDER, self::PAYER_RECEIVER, self::PAYER_OTHER, self::PAYER_ON_PICKUP])) {
+		if ($payerSelect && !array_key_exists($payerSelect, [PayerTypes::ALLOWED_PAYER_TYPES])) {
 			throw new InvalidArgumentException('Unknown PAyer select: ' . $payerSelect);
 		}
 
@@ -431,7 +402,7 @@ class Order
 	 */
 	public function setLoadingSelect(?int $loadingSelect)
 	{
-		if ($loadingSelect && !in_array(self::LOADING_SELECT_PREDEFINED_SENDER, [self::LOADING_SELECT_OTHER_ADDRESS, self::LOADING_SELECT_PERSONAL])) {
+		if ($loadingSelect && !array_key_exists($loadingSelect, LoadingTypes::ALLOWED_LOADING_TYPES)) {
 			throw new InvalidArgumentException('Unknown Loading Select ID' . $this->loadingSelect);
 		}
 
@@ -522,11 +493,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getTwowayShipment(): ?bool
+	public function getTwowayShipment(): int
 	{
-		return $this->twowayShipment;
+		return (int)$this->twowayShipment;
 	}
 
 	/**
@@ -563,11 +534,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getYard(): ?bool
+	public function getYard(): int
 	{
-		return $this->yard;
+		return (int)$this->yard;
 	}
 
 	/**
@@ -595,12 +566,7 @@ class Order
 	 */
 	public function setDeliveryNotesBack(?int $deliveryNotesBack)
 	{
-		if ($deliveryNotesBack && !in_array($deliveryNotesBack, [
-			self::DELIVERY_NOTE_BACK_NO,
-			self::DELIVERY_NOTE_BACK_PAPER,
-			self::DELIVERY_NOTE_BACK_ELECTRONIC,
-			self::DELIVERY_NOTE_BACK_BOTH,
-			])) {
+		if ($deliveryNotesBack && !array_key_exists($deliveryNotesBack, DeliveryNoteBackTypes::ALLOWED_DELIVERY_NOTE_BACK_TYPES)) {
 			throw new InvalidArgumentException('Unknown Delivery notes back: ' . $deliveryNotesBack);
 		}
 
@@ -609,11 +575,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getSmsAviso(): ?bool
+	public function getSmsAviso(): int
 	{
-		return $this->smsAviso;
+		return (int)$this->smsAviso;
 	}
 
 	/**
@@ -627,11 +593,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getLoadingAviso(): ?bool
+	public function getLoadingAviso(): int
 	{
-		return $this->loadingAviso;
+		return (int)$this->loadingAviso;
 	}
 
 	/**
@@ -645,11 +611,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getDischargeAviso(): ?bool
+	public function getDischargeAviso(): int
 	{
-		return $this->dischargeAviso;
+		return (int)$this->dischargeAviso;
 	}
 
 	/**
@@ -677,14 +643,7 @@ class Order
 	 */
 	public function setLoadingComfortId(?int $loadingComfortId)
 	{
-		if ($loadingComfortId && !in_array($loadingComfortId, [
-				self::LOADING_COMFORT,
-				self::LOADING_TOP_COMFORT,
-				self::LOADING_TOP_COMFORT_PLUS,
-				self::LOADING_TOP_COMFORT_PLUS_2,
-				self::LOADING_TOP_COMFORT_PLUS_PLUS,
-				self::LOADING_COMFORT_EXCLUSIVE
-			])) {
+		if ($loadingComfortId && !array_key_exists($loadingComfortId, LoadingComfortTypes::ALLOWED_LOADING_COMFORT_TYPES)) {
 			throw new InvalidArgumentException('Unknown freight cache ID: ' . $loadingComfortId);
 		}
 
@@ -725,12 +684,7 @@ class Order
 	 */
 	public function setDischargeComfortId(?int $dischargeComfortId)
 	{
-		if ($dischargeComfortId && !in_array($dischargeComfortId, [
-				self::DISCHARGE_COMFORT,
-				self::DISCHARGE_TOP_COMFORT,
-				self::DISCHARGE_TOP_COMFORT_PLUS,
-				self::DISCHARGE_COMFORT_EXCLUSIVE
-			])) {
+		if ($dischargeComfortId && !array_key_exists($dischargeComfortId, DischargeComfortTypes::ALLOWED_DISCHARGE_COMFORT_TYPES)) {
 			throw new InvalidArgumentException('Unknown freight cache ID: ' . $dischargeComfortId);
 		}
 
@@ -772,7 +726,7 @@ class Order
 	 */
 	public function setReturnPackId(?int $returnPackId)
 	{
-		if ($returnPackId && !in_array($returnPackId, [self::RETURN_PACK_NO, self::RETURN_PACK_NORMAL, self::RETURN_PACK_BIG])) {
+		if ($returnPackId && !array_key_exists($returnPackId, ReturnPackTypes::ALLOWED_RETURN_PACK_TYPES)) {
 			throw new InvalidArgumentException('Unknown return pack ID: ' . $returnPackId);
 		}
 
@@ -831,7 +785,7 @@ class Order
 	 */
 	public function setFreightCashId(?int $freightCashId)
 	{
-		if ($freightCashId && !in_array($freightCashId, [self::FREIGHT_CACHE_NO, self::FREIGHT_CACHE_DISCHARGE, self::FREIGHT_CACHE_LOADING])) {
+		if ($freightCashId && !array_key_exists($freightCashId, FreightCacheTypes::ALLOWED_FREIGHT_CACHE_TYPES)) {
 			throw new InvalidArgumentException('Unknown freight cache ID: ' . $freightCashId);
 		}
 
@@ -840,18 +794,18 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getCashOnDeliveryType(): ?bool
+	public function getCashOnDeliveryType(): int
 	{
-		return $this->cashOnDeliveryType;
+		return (int)$this->cashOnDeliveryType;
 	}
 
 	/**
-	 * @param bool|null $cashOnDeliveryType
+	 * @param bool $cashOnDeliveryType
 	 * @return $this
 	 */
-	public function setCashOnDeliveryType(?bool $cashOnDeliveryType)
+	public function setCashOnDeliveryType(bool $cashOnDeliveryType)
 	{
 		$this->cashOnDeliveryType = $cashOnDeliveryType;
 		return $this;
@@ -862,7 +816,7 @@ class Order
 	 */
 	public function getCashOnDeliveryPrice(): ?float
 	{
-		return $this->cashOnDeliveryPrice;
+		return round($this->cashOnDeliveryPrice, 2);
 	}
 
 	/**
@@ -871,6 +825,7 @@ class Order
 	 */
 	public function setCashOnDeliveryPrice(?float $cashOnDeliveryPrice)
 	{
+		$this->setCashOnDeliveryType(!!$cashOnDeliveryPrice);
 		$this->cashOnDeliveryPrice = $cashOnDeliveryPrice;
 		return $this;
 	}
@@ -1002,11 +957,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getOversize(): ?bool
+	public function getOversize(): int
 	{
-		return $this->oversize;
+		return (int)$this->oversize;
 	}
 
 	/**
@@ -1020,11 +975,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getConsider(): ?bool
+	public function getConsider(): int
 	{
-		return $this->consider;
+		return (int)$this->consider;
 	}
 
 	/**
@@ -1038,11 +993,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getLabelFragile(): ?bool
+	public function getLabelFragile(): int
 	{
-		return $this->labelFragile;
+		return (int)$this->labelFragile;
 	}
 
 	/**
@@ -1056,11 +1011,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getLabelDontTilt(): ?bool
+	public function getLabelDontTilt(): int
 	{
-		return $this->labelDontTilt;
+		return (int)$this->labelDontTilt;
 	}
 
 	/**
@@ -1074,11 +1029,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getLabelThisSideUp(): ?bool
+	public function getLabelThisSideUp(): int
 	{
-		return $this->labelThisSideUp;
+		return (int)$this->labelThisSideUp;
 	}
 
 	/**
@@ -1092,11 +1047,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getHydraulicFrontLoading(): ?bool
+	public function getHydraulicFrontLoading(): int
 	{
-		return $this->hydraulicFrontLoading;
+		return (int)$this->hydraulicFrontLoading;
 	}
 
 	/**
@@ -1110,11 +1065,11 @@ class Order
 	}
 
 	/**
-	 * @return bool|null
+	 * @return int
 	 */
-	public function getHydraulicFrontDischarge(): ?bool
+	public function getHydraulicFrontDischarge(): int
 	{
-		return $this->hydraulicFrontDischarge;
+		return (int)$this->hydraulicFrontDischarge;
 	}
 
 	/**
@@ -1168,7 +1123,7 @@ class Order
 	 */
 	public function getM3(): ?float
 	{
-		return $this->m3;
+		return round($this->m3, 2);
 	}
 
 	/**
@@ -1222,7 +1177,7 @@ class Order
 	 */
 	public function getOrderValue(): ?float
 	{
-		return $this->orderValue;
+		return round($this->orderValue, 1);
 	}
 
 	/**
@@ -1236,21 +1191,21 @@ class Order
 	}
 
 	/**
-	 * @return float|null
+	 * @return int|null
 	 */
-	public function getOrderValueCurrencyId(): ?float
+	public function getOrderValueCurrencyId(): ?int
 	{
 		return $this->orderValueCurrencyId;
 	}
 
 	/**
-	 * @param float|null $orderValueCurrencyId
+	 * @param int|null $orderValueCurrencyId
 	 * @return $this
 	 * @throws InvalidArgumentException
 	 */
-	public function setOrderValueCurrencyId(?float $orderValueCurrencyId)
+	public function setOrderValueCurrencyId(?int $orderValueCurrencyId)
 	{
-		if ($orderValueCurrencyId && !in_array($orderValueCurrencyId, [self::CURRENCY_CZK, self::CURRENCY_EUR])) {
+		if ($orderValueCurrencyId && !array_key_exists($orderValueCurrencyId, Currencies::ALLOWED_CURRENCIES)) {
 			throw new InvalidArgumentException('Not allowed currency');
 		}
 

@@ -10,7 +10,6 @@ namespace ToptransApiWrapper\Constants;
 class PackTypes
 {
 
-	const PUL_PALETY = 25;
 	const BALIK = 55;
 	const BEDNA = 32;
 	const BITO_BOX = 65;
@@ -36,9 +35,9 @@ class PackTypes
 	const XKARTON = 45;
 	const XKUS = 44;
 	const XOBALKA = 30;
+	const PUL_PALETY = 25;
 
 	const ALLOWED_TYPES = [
-		self::PUL_PALETY => 'PUL_PALETY',
 		self::BALIK => 'BALIK',
 		self::BEDNA => 'BEDNA',
 		self::BITO_BOX => 'BITO_BOX',
@@ -64,6 +63,7 @@ class PackTypes
 		self::XKARTON => 'XKARTON',
 		self::XKUS => 'XKUS',
 		self::XOBALKA => 'XOBALKA',
+		self::PUL_PALETY => 'PUL_PALETY',
 	];
 
 }

@@ -25,6 +25,10 @@ class OrderConverter
 			$arrayOrder = array_merge_recursive($arrayOrder, self::parseValues($nestedMethods, $order));
 		}
 
+		if (!$arrayOrder['m3']) {
+			unset($arrayOrder['m3']);
+		}
+
 		return $arrayOrder;
 	}
 

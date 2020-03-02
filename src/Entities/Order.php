@@ -361,8 +361,8 @@ class Order
 	 */
 	public function setPayerSelect(?int $payerSelect)
 	{
-		if ($payerSelect && !array_key_exists($payerSelect, [PayerTypes::ALLOWED_PAYER_TYPES])) {
-			throw new InvalidArgumentException('Unknown PAyer select: ' . $payerSelect);
+		if ($payerSelect && !array_key_exists($payerSelect, PayerTypes::ALLOWED_PAYER_TYPES)) {
+			throw new InvalidArgumentException('Unknown Payer select: ' . $payerSelect);
 		}
 
 		$this->payerSelect = $payerSelect;
@@ -466,7 +466,7 @@ class Order
 	 */
 	public function setDischargePersonalBranchId(?int $dischargePersonalBranchId)
 	{
-		if ($dischargePersonalBranchId && !array_key_exists($dischargePersonalBranchId, IBranches::ALLOWED_BRANCHES)) {
+		if ($dischargePersonalBranchId && !array_key_exists($dischargePersonalBranchId, Branches::ALLOWED_BRANCHES)) {
 			throw new InvalidArgumentException('Unknown branch ID: ' . $dischargePersonalBranchId);
 		}
 

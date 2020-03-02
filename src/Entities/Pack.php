@@ -19,7 +19,7 @@ class Pack
 	const DESCRIPTION_MAX_LEN = 100;
 
 	/** @var int */
-	private $type;
+	private $packID;
 
 	/** @var int */
 	private $quantity;
@@ -39,23 +39,23 @@ class Pack
 	/**
 	 * @return int
 	 */
-	public function getType(): int
+	public function getPackID(): int
 	{
-		return $this->type;
+		return $this->packID;
 	}
 
 	/**
-	 * @param int $type
+	 * @param int $packID
 	 * @return $this
 	 * @throws InvalidArgumentException
 	 */
-	public function setType($type)
+	public function setPackID($packID)
 	{
-		if (!array_key_exists($type, PackTypes::ALLOWED_TYPES)) {
-			throw new InvalidArgumentException('Unsupported package type ' . $type);
+		if (!array_key_exists($packID, PackTypes::ALLOWED_TYPES)) {
+			throw new InvalidArgumentException('Unsupported package type ' . $packID);
 		}
 
-		$this->type = $type;
+		$this->packID = $packID;
 		return $this;
 	}
 

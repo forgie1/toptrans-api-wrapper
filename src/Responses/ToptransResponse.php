@@ -27,12 +27,20 @@ abstract class ToptransResponse
 		$this->status = $data['status'] ?? 'error';
 		$this->errors = $data['errors'] ?? [];
 		$this->rawData = $data['data'] ?? [];
+
+		if ($this->isOk()) {
+			$this->parseRawData($this->getRawData());
+		}
 	}
 
 	public function isOk(): bool
 	{
 		return $this->getStatus() === self::STATUS_OK;
 	}
+
+	abstract protected function parseRawData($data);
+
+	// getters / setters
 
 	/**
 	 * @return string

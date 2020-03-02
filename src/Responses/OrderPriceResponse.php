@@ -18,12 +18,6 @@ class OrderPriceResponse extends ToptransResponse
 	/** @var string|null */
 	private $currencyCode;
 
-	public function __construct(array $data)
-	{
-		parent::__construct($data);
-		$this->parseRawData($this->getRawData());
-	}
-
 	/**
 	 * @return float|null
 	 */
@@ -40,7 +34,7 @@ class OrderPriceResponse extends ToptransResponse
 		return $this->currencyCode;
 	}
 
-	private function parseRawData($data)
+	protected function parseRawData($data)
 	{
 		$this->price = $data['PRICE'] ?? null;
 		$this->currencyCode = Currencies::ALLOWED_CURRENCIES[$data['CURRENCY_ID']] ?? null;

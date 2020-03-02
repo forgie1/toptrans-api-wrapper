@@ -24,9 +24,9 @@ abstract class ToptransResponse
 
 	public function __construct(array $data)
 	{
-		$this->status = $data['status'];
+		$this->status = $data['status'] ?? 'error';
 		$this->errors = $data['errors'] ?? [];
-		$this->rawData = $data['data'];
+		$this->rawData = $data['data'] ?? [];
 	}
 
 	public function isOk(): bool

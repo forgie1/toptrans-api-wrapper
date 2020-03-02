@@ -28,7 +28,7 @@ class Address
 	 * @var string|null
 	 * can be with descriptive number
 	 */
-	private $houseNumber;
+	private $houseNum;
 
 	/** @var string|null */
 	private $zip;
@@ -68,7 +68,7 @@ class Address
 	 * @param string|null $cityPart
 	 * @return $this
 	 */
-	public function setCityPart(string $cityPart)
+	public function setCityPart(?string $cityPart)
 	{
 		$this->cityPart = $cityPart;
 		return $this;
@@ -86,7 +86,7 @@ class Address
 	 * @param string|null $street
 	 * @return $this
 	 */
-	public function setStreet(string $street)
+	public function setStreet(?string $street)
 	{
 		$this->street = $street;
 		return $this;
@@ -95,18 +95,18 @@ class Address
 	/**
 	 * @return string|null
 	 */
-	public function getHouseNumber(): ?string
+	public function getHouseNum(): ?string
 	{
-		return $this->houseNumber;
+		return $this->houseNum;
 	}
 
 	/**
-	 * @param string|null $houseNumber
+	 * @param string|null $houseNum
 	 * @return $this
 	 */
-	public function setHouseNumber(string $houseNumber)
+	public function setHouseNum(?string $houseNum)
 	{
-		$this->houseNumber = $houseNumber;
+		$this->houseNum = $houseNum;
 		return $this;
 	}
 
@@ -115,14 +115,14 @@ class Address
 	 */
 	public function getZip(): ?string
 	{
-		return $this->zip;
+		return str_replace(' ', '', $this->zip);
 	}
 
 	/**
 	 * @param string|null $zip
 	 * @return $this
 	 */
-	public function setZip(string $zip)
+	public function setZip(?string $zip)
 	{
 		$this->zip = $zip;
 		return $this;

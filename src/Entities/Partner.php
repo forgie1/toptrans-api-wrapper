@@ -19,19 +19,19 @@ class Partner
 	private $registrationCode;
 
 	/** @var string|null */
-	private $vatNumber;
+	private $vatCode;
 
 	/** @var string|null */
-	private $contactPersonFirstName;
+	private $firstName;
 
 	/** @var string|null */
-	private $contactPersonLastName;
+	private $lastName;
 
 	/** @var string|null */
-	private $contactPersonPhone;
+	private $phone;
 
 	/** @var string|null */
-	private $contactPersonEmail;
+	private $email;
 
 	/** @var Address */
 	private $address;
@@ -64,7 +64,7 @@ class Partner
 	 */
 	public function getRegistrationCode(): string
 	{
-		return $this->registrationCode;
+		return $this->registrationCode ?? '';
 	}
 
 	/**
@@ -80,90 +80,90 @@ class Partner
 	/**
 	 * @return string|null
 	 */
-	public function getVatNumber(): ?string
+	public function getVatCode(): ?string
 	{
-		return $this->vatNumber;
+		return $this->vatCode;
 	}
 
 	/**
-	 * @param string|null $vatNumber
+	 * @param string|null $vatCode
 	 * @return $this
 	 */
-	public function setVatNumber($vatNumber)
+	public function setVatCode($vatCode)
 	{
-		$this->vatNumber = $vatNumber;
+		$this->vatCode = $vatCode;
 		return $this;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getContactPersonFirstName(): ?string
+	public function getFirstName(): ?string
 	{
-		return $this->contactPersonFirstName;
+		return $this->firstName;
 	}
 
 	/**
-	 * @param string|null $contactPersonFirstName
+	 * @param string|null $firstName
 	 * @return $this
 	 */
-	public function setContactPersonFirstName($contactPersonFirstName)
+	public function setFirstName($firstName)
 	{
-		$this->contactPersonFirstName = $contactPersonFirstName;
+		$this->firstName = $firstName;
 		return $this;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getContactPersonLastName(): ?string
+	public function getLastName(): ?string
 	{
-		return $this->contactPersonLastName;
+		return $this->lastName;
 	}
 
 	/**
-	 * @param string|null $contactPersonLastName
+	 * @param string|null $lastName
 	 * @return $this
 	 */
-	public function setContactPersonLastName($contactPersonLastName)
+	public function setLastName($lastName)
 	{
-		$this->contactPersonLastName = $contactPersonLastName;
+		$this->lastName = $lastName;
 		return $this;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getContactPersonPhone(): ?string
+	public function getPhone(): ?string
 	{
-		return $this->contactPersonPhone;
+		return $this->phone;
 	}
 
 	/**
-	 * @param string|null $contactPersonPhone
+	 * @param string|null $phone
 	 * @return $this
 	 */
-	public function setContactPersonPhone($contactPersonPhone)
+	public function setPhone($phone)
 	{
-		$this->contactPersonPhone = $contactPersonPhone;
+		$this->phone = $phone;
 		return $this;
 	}
 
 	/**
 	 * @return string|null
 	 */
-	public function getContactPersonEmail(): ?string
+	public function getEmail(): ?string
 	{
-		return $this->contactPersonEmail;
+		return $this->email;
 	}
 
 	/**
-	 * @param string|null $contactPersonEmail
+	 * @param string|null $email
 	 * @return $this
 	 */
-	public function setContactPersonEmail($contactPersonEmail)
+	public function setEmail($email)
 	{
-		$this->contactPersonEmail = $contactPersonEmail;
+		$this->email = $email;
 		return $this;
 	}
 

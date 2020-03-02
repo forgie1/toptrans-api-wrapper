@@ -28,13 +28,13 @@ class Pack
 	private $description;
 
 	/** @var int|null probably in [cm]*/
-	private $length;
+	private $dimensionsD;
 
 	/** @var int|null probably in [cm]*/
-	private $width;
+	private $dimensionsS;
 
 	/** @var int|null probably in [cm]*/
-	private $height;
+	private $dimensionsV;
 
 	/**
 	 * @return int
@@ -108,54 +108,54 @@ class Pack
 	/**
 	 * @return int|null
 	 */
-	public function getLength(): ?int
+	public function getDimensionsD(): ?int
 	{
-		return $this->length;
+		return $this->dimensionsD;
 	}
 
 	/**
-	 * @param int|null $length
+	 * @param int|null $dimensionsD
 	 * @return $this
 	 */
-	public function setLength($length)
+	public function setDimensionsD($dimensionsD)
 	{
-		$this->length = $length;
+		$this->dimensionsD = $dimensionsD;
 		return $this;
 	}
 
 	/**
 	 * @return int|null
 	 */
-	public function getWidth(): ?int
+	public function getDimensionsS(): ?int
 	{
-		return $this->width;
+		return $this->dimensionsS;
 	}
 
 	/**
-	 * @param int|null $width
+	 * @param int|null $dimensionsS
 	 * @return $this
 	 */
-	public function setWidth($width)
+	public function setDimensionsS($dimensionsS)
 	{
-		$this->width = $width;
+		$this->dimensionsS = $dimensionsS;
 		return $this;
 	}
 
 	/**
 	 * @return int|null
 	 */
-	public function getHeight(): ?int
+	public function getDimensionsV(): ?int
 	{
-		return $this->height;
+		return $this->dimensionsV;
 	}
 
 	/**
-	 * @param int|null $height
+	 * @param int|null $dimensionsV
 	 * @return $this
 	 */
-	public function setHeight($height)
+	public function setDimensionsV($dimensionsV)
 	{
-		$this->height = $height;
+		$this->dimensionsV = $dimensionsV;
 		return $this;
 	}
 

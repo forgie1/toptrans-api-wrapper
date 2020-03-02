@@ -7,11 +7,16 @@
 
 namespace ToptransApiWrapper\Responses;
 
+use ToptransApiWrapper\Constants\Currencies;
+
 class OrderPriceResponse extends ToptransResponse
 {
 
 	/** @var float|null */
 	private $price;
+
+	/** @var string|null */
+	private $currencyCode;
 
 	public function __construct(array $data)
 	{
@@ -27,9 +32,18 @@ class OrderPriceResponse extends ToptransResponse
 		return $this->price;
 	}
 
+	/**
+	 * @return string|null
+	 */
+	public function getCurrencyCode(): ?string
+	{
+		return $this->currencyCode;
+	}
+
 	private function parseRawData($data)
 	{
-		$this->price = $data['price'] ?? null;
+		$this->price = $data['PRICE'] ?? null;
+		$this->currencyCode = Currencies::ALLOWED_CURRENCIES[$data['CURRENCY_ID']] ?? null;
 	}
 
 }

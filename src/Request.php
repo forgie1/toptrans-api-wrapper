@@ -17,8 +17,8 @@ class Request
 	const API_HOST = 'https://zp.toptrans.cz';
 	const API_BASE_PATH = '/api/json';
 
-	const CONNECTION_TIMEOUT = 2; // sec
-	const TIMEOUT = 4; // sec
+	const CONNECTION_TIMEOUT = 30; // sec
+	const TIMEOUT = 45; // sec
 
 	/** @var string */
 	private $username;
@@ -64,6 +64,26 @@ class Request
 		}
 
 		return $decodedResponse;
+	}
+
+	/**
+	 * @param int $timeout
+	 * @return $this
+	 */
+	public function setTimeout($timeout)
+	{
+		$this->timeout = $timeout;
+		return $this;
+	}
+
+	/**
+	 * @param int $connectionTimeout
+	 * @return $this
+	 */
+	public function setConnectionTimeout($connectionTimeout)
+	{
+		$this->connectionTimeout = $connectionTimeout;
+		return $this;
 	}
 
 }

@@ -7,7 +7,9 @@
 
 namespace ToptransApiWrapper;
 
+use ToptransApiWrapper\Entities\Adr;
 use ToptransApiWrapper\Entities\Pack;
+use ToptransApiWrapper\Exceptions\ToptransApiWrapperException;
 
 class OrderConverter
 {
@@ -32,7 +34,6 @@ class OrderConverter
 		return $arrayOrder;
 	}
 
-
 	private static function parseValues($nestedMethods, $object): array
 	{
 		$result = [];
@@ -52,16 +53,36 @@ class OrderConverter
 			}
 			return $result;
 		} elseif (is_array($value)) {
-			while ($pack = array_shift($value)) {
-				/** @var Pack $pack */
-				$result[$jsonApiKey][] = [
-					'pack_id' => $pack->getPackID(),
-					'quantity' => $pack->getQuantity(),
-					'description' => $pack->getDescription(),
-					'dimensions_d' => $pack->getDimensionsD(),
-					'dimensions_s' => $pack->getDimensionsS(),
-					'dimensions_v' => $pack->getDimensionsV(),
-				];
+			while ($entity = array_shift($value)) {
+				if (is_object($entity)) {
+					switch (get_class($entity)) {
+						case Pack::class:
+							/** @var Pack $entity */
+							$result[$jsonApiKey][] = [
+								'pack_id' => $entity->getPackID(),
+								'quantity' => $entity->getQuantity(),
+								'description' => $entity->getDescription(),
+								'dimensions_d' => $entity->getDimensionsD(),
+								'dimensions_s' => $entity->getDimensionsS(),
+								'dimensions_v' => $entity->getDimensionsV(),
+							];
+							break;
+						case Adr::class:
+							/** @var Adr $entity */
+							$result[$jsonApiKey][] = [
+								'un' => $entity->getUn(),
+								'count' => $entity->getCount(),
+								'kg' => $entity->getKg(),
+								'description' => $entity->getDescription(),
+								'environment_danger' => $entity->isEnvironmentDanger(),
+							];
+							break;
+						default:
+							throw new ToptransApiWrapperException('Unknown entity: ' . get_class($entity));
+					}
+				} else {
+					throw new ToptransApiWrapperException('Unsupported array type: ' . gettype($entity));
+				}
 			}
 			return $result;
 		} else {

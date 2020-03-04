@@ -7,7 +7,9 @@
 
 namespace ToptransApiWrapper\Entities;
 
-class OrderResponse extends Order
+use ToptransApiWrapper\Responses\ToptransResponse;
+
+class OrderSendResponse extends ToptransResponse
 {
 
 	const SOURCE_FORM = 1;
@@ -34,6 +36,13 @@ class OrderResponse extends Order
 
 	/** @var array Vytvořená objednávka má další atributy generované systémem */
 	private $otherParameters;
+
+	protected function parseRawData($data)
+	{
+		// todo
+	}
+
+	// GETTERS SETTERS
 
 	/**
 	 * @return int

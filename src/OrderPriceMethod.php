@@ -8,7 +8,6 @@
 namespace ToptransApiWrapper;
 
 use ToptransApiWrapper\Entities\Order;
-use ToptransApiWrapper\Exceptions\OrderConverter;
 use ToptransApiWrapper\Responses\OrderPriceResponse;
 
 class OrderPriceMethod

@@ -61,15 +61,15 @@ abstract class ToptransResponse
 	}
 
 	/**
-	 * @return string
+	 * @return array
 	 */
-	public function getErrors(): string
+	public function getErrors(): array
 	{
 		return $this->errors;
 	}
 
 	/**
-	 * @param string $errors
+	 * @param array $errors
 	 * @return $this
 	 */
 	public function setErrors($errors)

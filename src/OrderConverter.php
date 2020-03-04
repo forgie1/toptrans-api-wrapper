@@ -5,9 +5,9 @@
  * Copyright © 2020 Ján Forgáč <forgac@artfocus.cz>
  */
 
-namespace ToptransApiWrapper\Exceptions;
+namespace ToptransApiWrapper;
 
-use ToptransApiWrapper\Entities\Order;
+use ToptransApiWrapper\Entities\Pack;
 
 class OrderConverter
 {
@@ -52,15 +52,16 @@ class OrderConverter
 			}
 			return $result;
 		} elseif (is_array($value)) {
-			while ($subValue = array_shift($value)) {
-				if (is_object($subValue)) {
-					$newVal = self::parseValues($nestedMethods, $subValue);
-					if ($newVal) {
-						$result[$jsonApiKey][] = $newVal;
-					}
-				} elseif ($subValue) {
-					$result[$jsonApiKey][] = $subValue;
-				}
+			while ($pack = array_shift($value)) {
+				/** @var Pack $pack */
+				$result[$jsonApiKey][] = [
+					'pack_id' => $pack->getPackID(),
+					'quantity' => $pack->getQuantity(),
+					'description' => $pack->getDescription(),
+					'dimensions_d' => $pack->getDimensionsD(),
+					'dimensions_s' => $pack->getDimensionsS(),
+					'dimensions_v' => $pack->getDimensionsV(),
+				];
 			}
 			return $result;
 		} else {

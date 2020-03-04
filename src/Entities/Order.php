@@ -82,7 +82,7 @@ class Order
 	private $deliveryNotesBack;
 
 	/** @var bool|null DEFAULT true */
-	private $smsAviso;
+	private $avisoSms;
 
 	/** @var bool|null Telefonická avizace nakládky <-- DEFAULT false */
 	private $loadingAviso;
@@ -139,7 +139,7 @@ class Order
 	private $cashOnDeliverySwift;
 
 	/** @var string|null Variabilní symbol */
-	private $varSym;
+	private $varSymbol;
 
 	/** @var bool|null 	Nadrozměr */
 	private $oversize;
@@ -233,9 +233,9 @@ class Order
 	/**
 	 * @return \DateTime|null
 	 */
-	public function getLoadingDate(): ?\DateTime
+	public function getLoadingDate(): ?string
 	{
-		return $this->loadingDate;
+		return $this->loadingDate ? $this->loadingDate->format('Y-m-d') : null;
 	}
 
 	/**
@@ -291,9 +291,9 @@ class Order
 	/**
 	 * @return \DateTime|null
 	 */
-	public function getDischargeDate(): ?\DateTime
+	public function getDischargeDate(): ?string
 	{
-		return $this->dischargeDate;
+		return $this->dischargeDate ? $this->dischargeDate->format('Y-m-d') : null;
 	}
 
 	/**
@@ -577,18 +577,18 @@ class Order
 	/**
 	 * @return int
 	 */
-	public function getSmsAviso(): int
+	public function getAvisoSms(): int
 	{
-		return (int)$this->smsAviso;
+		return (int)$this->avisoSms;
 	}
 
 	/**
-	 * @param bool|null $smsAviso
+	 * @param bool|null $avisoSms
 	 * @return $this
 	 */
-	public function setSmsAviso(?bool $smsAviso)
+	public function setAvisoSms(?bool $avisoSms)
 	{
-		$this->smsAviso = $smsAviso;
+		$this->avisoSms = $avisoSms;
 		return $this;
 	}
 
@@ -941,18 +941,18 @@ class Order
 	/**
 	 * @return string|null
 	 */
-	public function getVarSym(): ?string
+	public function getVarSymbol(): ?string
 	{
-		return $this->varSym;
+		return $this->varSymbol;
 	}
 
 	/**
-	 * @param string|null $varSym
+	 * @param string|null $varSymbol
 	 * @return $this
 	 */
-	public function setVarSym(?string $varSym)
+	public function setVarSymbol(?string $varSymbol)
 	{
-		$this->varSym = $varSym;
+		$this->varSymbol = $varSymbol;
 		return $this;
 	}
 
@@ -1225,7 +1225,7 @@ class Order
 	 * @param Pack[] $packs
 	 * @return $this
 	 */
-	public function setPacks($packs)
+	public function setPacks(array $packs)
 	{
 		$this->packs = $packs;
 		return $this;

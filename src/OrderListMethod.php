@@ -11,12 +11,12 @@ use ToptransApiWrapper\Constants\OrderApiArrayKeys;
 use ToptransApiWrapper\Entities\Order;
 use ToptransApiWrapper\Responses;
 
-class OrderSaveMethod
+class OrderListMethod
 {
 
-	const REQUEST_PATH = '/order/save';
+	const REQUEST_PATH = '/order/list';
 
-	const ALLOWED_PARAMETERS = OrderApiArrayKeys::ALL_API_KEYS;
+	const ALLOWED_PARAMETERS = [];
 
 	/** @var Order */
 	private $order;
@@ -26,10 +26,10 @@ class OrderSaveMethod
 		$this->order = $order;
 	}
 
-	public function sendRequest(Request $request): Responses\OrderSaveResponse
+	public function sendRequest(Request $request): Responses\OrderListResponse
 	{
 		$response = $request->sentRequest(OrderConverter::orderToArray($this->order, self::ALLOWED_PARAMETERS), self::REQUEST_PATH);
-		return new Responses\OrderSaveResponse($response);
+		return new Responses\OrderListResponse($response);
 	}
 
 }

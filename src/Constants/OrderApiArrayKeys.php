@@ -98,11 +98,7 @@ class OrderApiArrayKeys
 			'order_value',
 			'order_value_currency_id',
 			'packs',
-			'adrs.un',
-			'adrs.count',
-			'adrs.kg',
-			'adrs.description',
-			'adrs.environment_danger',
+			'adrs',
 		];
 
 }

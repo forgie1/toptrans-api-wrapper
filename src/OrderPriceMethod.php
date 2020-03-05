@@ -8,7 +8,7 @@
 namespace ToptransApiWrapper;
 
 use ToptransApiWrapper\Entities\Order;
-use ToptransApiWrapper\Responses\OrderPriceResponse;
+use ToptransApiWrapper\Responses;
 
 class OrderPriceMethod
 {
@@ -45,10 +45,10 @@ class OrderPriceMethod
 		$this->order = $order;
 	}
 
-	public function sendRequest(Request $request): OrderPriceResponse
+	public function sendRequest(Request $request): Responses\OrderPriceResponse
 	{
 		$response = $request->sentRequest(OrderConverter::orderToArray($this->order, self::ALLOWED_PARAMETERS), self::REQUEST_PATH);
-		return new OrderPriceResponse($response);
+		return new Responses\OrderPriceResponse($response);
 	}
 
 }

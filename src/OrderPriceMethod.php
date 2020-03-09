@@ -7,11 +7,12 @@
 
 namespace ToptransApiWrapper;
 
-use ToptransApiWrapper\Entities\Order;
 use ToptransApiWrapper\Responses;
 
-class OrderPriceMethod
+class OrderPriceMethod extends OrderMethod
 {
+
+	use OrderMethodTrait;
 
 	const REQUEST_PATH = '/order/price';
 
@@ -37,17 +38,9 @@ class OrderPriceMethod
 	'm3',
 	];
 
-	/** @var Order */
-	private $order;
-
-	public function __construct(Order $order)
-	{
-		$this->order = $order;
-	}
-
 	public function sendRequest(Request $request): Responses\OrderPriceResponse
 	{
-		$response = $request->sentRequest(OrderConverter::orderToArray($this->order, self::ALLOWED_PARAMETERS), self::REQUEST_PATH);
+		$response = parent::sendRequest($request);
 		return new Responses\OrderPriceResponse($response);
 	}
 

@@ -8,27 +8,20 @@
 namespace ToptransApiWrapper;
 
 use ToptransApiWrapper\Constants\OrderApiArrayKeys;
-use ToptransApiWrapper\Entities\Order;
 use ToptransApiWrapper\Responses;
 
-class OrderSaveMethod
+class OrderSaveMethod extends OrderMethod
 {
+
+	use OrderMethodTrait;
 
 	const REQUEST_PATH = '/order/save';
 
 	const ALLOWED_PARAMETERS = OrderApiArrayKeys::ALL_API_KEYS;
 
-	/** @var Order */
-	private $order;
-
-	public function __construct(Order $order)
-	{
-		$this->order = $order;
-	}
-
 	public function sendRequest(Request $request): Responses\OrderSaveResponse
 	{
-		$response = $request->sentRequest(OrderConverter::orderToArray($this->order, self::ALLOWED_PARAMETERS), self::REQUEST_PATH);
+		$response = parent::sendRequest($request);
 		return new Responses\OrderSaveResponse($response);
 	}
 

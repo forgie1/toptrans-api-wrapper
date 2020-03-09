@@ -97,8 +97,8 @@ class Pack
 	 */
 	public function setDescription($description)
 	{
-		if (strlen($description) > 100) {
-			throw new Exceptions\InvalidArgumentException('Description can be max ' . self::DESCRIPTION_MAX_LEN . ' characters long');
+		if (mb_strlen($description, 'UTF-8') > 100) {
+			throw new Exceptions\InvalidArgumentException('Pack description can be max ' . self::DESCRIPTION_MAX_LEN . ' characters long');
 		}
 
 		$this->description = $description;

@@ -525,8 +525,8 @@ class Order
 	 */
 	public function setTwoWayShipmentDescription(?string $twoWayShipmentDescription)
 	{
-		if (strlen($twoWayShipmentDescription) > self::TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH) {
-			throw new InvalidArgumentException('Description is too long');
+		if (mb_strlen($twoWayShipmentDescription, 'UTF-8') > self::TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH) {
+			throw new InvalidArgumentException('TwoWayShipmentDescription can be max ' . self::TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH . ' characters long.');
 		}
 
 		$this->twoWayShipmentDescription = $twoWayShipmentDescription;

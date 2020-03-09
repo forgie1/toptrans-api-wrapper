@@ -38,7 +38,7 @@ class Request
 		$this->password = $password;
 	}
 
-	public function sentRequest(array $arrayData, string $methodPath): array
+	public function sendRequest(array $arrayData, string $methodPath): array
 	{
 		try {
 			$client = new GuzzleHttp\Client(['base_uri' => self::API_HOST]);

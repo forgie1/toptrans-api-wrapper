@@ -10,6 +10,8 @@ namespace ToptransApiWrapper\Constants;
 class LoadingTypes
 {
 
+	const BRANCH_LOAD_URL = 'https://zp.toptrans.cz/api/json/register/branch';
+
 	const LOADING_SELECT_PREDEFINED_SENDER = 1; //adresa objednavatele <-- DEFAULT
 	const LOADING_SELECT_OTHER_ADDRESS = 2; //jiná adresa
 	const LOADING_SELECT_PERSONAL = 3; //osobní podej

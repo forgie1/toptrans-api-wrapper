@@ -171,7 +171,7 @@ class Partner
 	 * @return Address
 	 * @throws InvalidArgumentException
 	 */
-	public function getAddress(): Address
+	public function getAddress()
 	{
 		if (!$this->address) {
 			throw new InvalidArgumentException('Address is mandatory in Partner');
@@ -184,7 +184,7 @@ class Partner
 	 * @param Address $address
 	 * @return $this
 	 */
-	public function setAddress(Address $address)
+	public function setAddress($address)
 	{
 		$this->address = $address;
 		return $this;

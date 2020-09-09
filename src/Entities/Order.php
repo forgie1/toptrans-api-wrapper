@@ -18,6 +18,7 @@ use ToptransApiWrapper\Constants\OrderTerms;
 use ToptransApiWrapper\Constants\PayerTypes;
 use ToptransApiWrapper\Constants\ReturnPackTypes;
 use ToptransApiWrapper\Exceptions\InvalidArgumentException;
+use ToptransApiWrapper\Exceptions\ToptransApiWrapperException;
 
 class Order
 {
@@ -1214,11 +1215,17 @@ class Order
 	}
 
 	/**
+	 * @param bool $noErrorOnNoPacks
 	 * @return Pack[]
+	 * @throws ToptransApiWrapperException
 	 */
-	public function getPacks(): array
+	public function getPacks(bool $noErrorOnNoPacks = false): array
 	{
-		return $this->packs;
+		if ($noErrorOnNoPacks || $this->packs) {
+			return $this->packs ?: [];
+		} else {
+			throw new ToptransApiWrapperException('There are no packs');
+		}
 	}
 
 	/**

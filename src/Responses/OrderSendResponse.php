@@ -5,9 +5,7 @@
  * Copyright © 2020 Ján Forgáč <forgac@artfocus.cz>
  */
 
-namespace ToptransApiWrapper\Entities;
-
-use ToptransApiWrapper\Responses\ToptransResponse;
+namespace ToptransApiWrapper\Responses;
 
 class OrderSendResponse extends ToptransResponse
 {

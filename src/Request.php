@@ -61,6 +61,9 @@ class Request
 			}
 		} catch (GuzzleHttp\Exception\RequestException $e) {
 			$decodedResponse['errors'][] = $e->getMessage();
+		} catch (GuzzleHttp\Exception\ConnectException $e) {
+			$decodedResponse['errors'][] = 'Nepodařilo se spojit se serverem toptransu, zkuste to prosím znova:';
+			$decodedResponse['errors'][] = 'Error ' . $e->getCode() . ': ' . $e->getMessage();
 		}
 
 		return $decodedResponse;

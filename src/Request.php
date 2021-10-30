@@ -32,15 +32,27 @@ class Request
 	/** @var int in sec */
 	private $connectionTimeout = self::CONNECTION_TIMEOUT;
 
+	/** @var ToptransLoggerI|null */
+	private $logger;
+
 	public function __construct(string $username, string $password)
 	{
 		$this->username = $username;
 		$this->password = $password;
 	}
 
+	/**  @param ToptransLoggerI|null $logger */
+	public function setLogger($logger)
+	{
+		$this->logger = $logger;
+	}
+
 	public function sendRequest(array $arrayData, string $methodPath): array
 	{
 		try {
+			$this->logger?->logg('auth data', [$this->username, $this->password]);
+			$this->logger?->logg('request data', $arrayData);
+
 			$client = new GuzzleHttp\Client(['base_uri' => self::API_HOST]);
 			$response = $client->request('POST', self::API_BASE_PATH . $methodPath, [
 				'auth' => [$this->username, $this->password],
@@ -65,6 +77,8 @@ class Request
 			$decodedResponse['errors'][] = 'Nepodařilo se spojit se serverem toptransu, zkuste to prosím znova:';
 			$decodedResponse['errors'][] = 'Error ' . $e->getCode() . ': ' . $e->getMessage();
 		}
+
+		$this->logger?->logg('decoded response', $decodedResponse);
 
 		return $decodedResponse;
 	}

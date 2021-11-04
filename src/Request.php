@@ -42,7 +42,7 @@ class Request
 	}
 
 	/**  @param ToptransLoggerI|null $logger */
-	public function setLogger($logger)
+	public function setLogger(?ToptransLoggerI $logger)
 	{
 		$this->logger = $logger;
 	}

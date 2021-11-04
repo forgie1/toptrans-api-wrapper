@@ -10,6 +10,6 @@ namespace ToptransApiWrapper;
 interface ToptransLoggerI
 {
 
-	public function logg(string $message, mixed $context = null);
+	public function logg(string $message, array $context = []);
 
 }

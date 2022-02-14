@@ -526,7 +526,7 @@ class Order
 	 */
 	public function setTwoWayShipmentDescription(?string $twoWayShipmentDescription)
 	{
-		if (mb_strlen($twoWayShipmentDescription, 'UTF-8') > self::TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH) {
+		if ($twoWayShipmentDescription && mb_strlen($twoWayShipmentDescription, 'UTF-8') > self::TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH) {
 			throw new InvalidArgumentException('TwoWayShipmentDescription can be max ' . self::TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH . ' characters long.');
 		}
 
@@ -817,7 +817,7 @@ class Order
 	 */
 	public function getCashOnDeliveryPrice(): ?float
 	{
-		return round($this->cashOnDeliveryPrice, 2);
+		return $this->cashOnDeliveryPrice ? round($this->cashOnDeliveryPrice, 2) : null;
 	}
 
 	/**
@@ -1124,7 +1124,7 @@ class Order
 	 */
 	public function getM3(): ?float
 	{
-		return round($this->m3, 2);
+		return isset($this->m3) ? round($this->m3, 2) : null;
 	}
 
 	/**
@@ -1178,7 +1178,7 @@ class Order
 	 */
 	public function getOrderValue(): ?float
 	{
-		return round($this->orderValue, 1);
+		return $this->orderValue ? round($this->orderValue, 1) : null;
 	}
 
 	/**
@@ -1276,9 +1276,9 @@ class Order
 		return $this;
 	}
 
-	private function validateTime($time)
+	private function validateTime(?string $time)
 	{
-		if (preg_match('~^\d\d\:\d\d$~', $time)) {
+		if ($time && !preg_match('~^\d\d\:\d\d$~', $time)) {
 			throw new InvalidArgumentException('Time must by in the format hh:mm');
 		}
 	}

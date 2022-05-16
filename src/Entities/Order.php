@@ -26,169 +26,169 @@ class Order
 	const TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH = 50;
 
 	/** @var int Termín. Viz číselník termínů */
-	private $termId;
+	protected $termId;
 
 	/** @var string|null OznaČení */
-	private $label;
+	protected $label;
 
 	/** @var \DateTime|null */
-	private $loadingDate;
+	protected $loadingDate;
 
 	/** @var string|null */
-	private $loadingTimeFrom;
+	protected $loadingTimeFrom;
 
 	/** @var string|null */
-	private $loadingTimeTo;
+	protected $loadingTimeTo;
 
 	/** @var \DateTime|null */
-	private $dischargeDate;
+	protected $dischargeDate;
 
 	/** @var string|null */
-	private $dischargeTimeFrom;
+	protected $dischargeTimeFrom;
 
 	/** @var string|null */
-	private $dischargeTimeTo;
+	protected $dischargeTimeTo;
 
 	/** @var int|null see constants above */
-	private $payerSelect;
+	protected $payerSelect;
 
 	/** @var Partner|null pokud payer_select=3 -- Plátce přepravy*/
-	private $payer;
+	protected $payer;
 
 	/** @var int|null Výběr nakládky přepravy */
-	private $loadingSelect;
+	protected $loadingSelect;
 
 	/** @var Partner|null pokud loading_select=2 -- Nakládka */
-	private $loading;
+	protected $loading;
 
 	/** @var int|null pokud loading_select=3 -- ID střediska pro osobní podej. Viz číselník středisek */
-	private $loadingPersonalBranchId;
+	protected $loadingPersonalBranchId;
 
 	/** @var int|null pokud term_id=5 -- ID střediska pro osobní odběr. Viz číselník středisek */
-	private $dischargePersonalBranchId;
+	protected $dischargePersonalBranchId;
 
 	/** @var Partner Vykládka */
-	private $discharge;
+	protected $discharge;
 
 	/** @var bool|null Obousměrná zásilka */
-	private $twowayShipment;
+	protected $twowayShipment;
 
 	/** @var string|null Popis obousměrné zásilky */
-	private $twoWayShipmentDescription;
+	protected $twoWayShipmentDescription;
 
 	/** @var bool|null Sběrný dvůr */
-	private $yard;
+	protected $yard;
 
 	/** @var int|null */
-	private $deliveryNotesBack;
+	protected $deliveryNotesBack;
 
 	/** @var bool|null DEFAULT true */
-	private $avisoSms;
+	protected $avisoSms;
 
 	/** @var bool|null Telefonická avizace nakládky <-- DEFAULT false */
-	private $loadingAviso;
+	protected $loadingAviso;
 
 	/** @var bool|null Telefonická avizace vykládky <-- DEFAULT false */
-	private $dischargeAviso;
+	protected $dischargeAviso;
 
 	/** @var int|null Služba Comfort na nakládce (viz číselník) <-- DEFAULT 1 */
-	private $loadingComfortId;
+	protected $loadingComfortId;
 
 	/** @var int|null Počet pater na nakládce (pro některé varianty služby Comfort) */
-	private $loadingFloors;
+	protected $loadingFloors;
 
 	/** @var int|null Služba Comfort na nakládce (viz číselník) */
-	private $dischargeComfortId;
+	protected $dischargeComfortId;
 
 	/** @var int|null Počet pater na vykládce (pro některé varianty služby Comfort) */
-	private $dischargeFloors;
+	protected $dischargeFloors;
 
 	/** @var int|null Služba vratný obal. Hodnoty viz číselník vratných obalů */
-	private $returnPackId;
+	protected $returnPackId;
 
 	/** @var int|null pokud return_pack_id > 0	- počet vratných obalů */
-	private $returnPackCount;
+	protected $returnPackCount;
 
 	/** @var string|null  Popis vratného obalu max 255 znaku */
-	private $returnPackDescription;
+	protected $returnPackDescription;
 
 	/** @var int|null  Služba přepravné v hotovnosti. Hodnoty viz číselník */
-	private $freightCashId;
+	protected $freightCashId;
 
 	/** @var bool|null  Automaticky podle cash_on_delivery_price -- Služba dobírka */
-	private $cashOnDeliveryType;
+	protected $cashOnDeliveryType;
 
 	/** @var float|null  pokud cashon_delivery_type=true -- Výše dobírky */
-	private $cashOnDeliveryPrice; //	number(10,2)
+	protected $cashOnDeliveryPrice; //	number(10,2)
 
 	/** @var string|null  ID měmy (viz číselník) */
-	private $cashOnDeliveryPriceCurId;
+	protected $cashOnDeliveryPriceCurId;
 
 	/** @var string|null Číslo účtu - předčíslí */
-	private $cashOnDeliveryAccount1;
+	protected $cashOnDeliveryAccount1;
 
 	/** @var string|null Číslo účtu */
-	private $cashOnDeliveryAccount2;
+	protected $cashOnDeliveryAccount2;
 
 	/** @var string|null Kód banky */
-	private $cashOnDeliveryBank;
+	protected $cashOnDeliveryBank;
 
 	/** @var string|null IBAN */
-	private $cashOnDeliveryIban;
+	protected $cashOnDeliveryIban;
 
 	/** @var string|null SWIFT */
-	private $cashOnDeliverySwift;
+	protected $cashOnDeliverySwift;
 
 	/** @var string|null Variabilní symbol */
-	private $varSymbol;
+	protected $varSymbol;
 
 	/** @var bool|null 	Nadrozměr */
-	private $oversize;
+	protected $oversize;
 
 	/** @var bool|null 	Převážit */
-	private $consider;
+	protected $consider;
 
 	/** @var bool|null 	Křehké */
-	private $labelFragile;
+	protected $labelFragile;
 
 	/** @var bool|null 	Nestohovat */
-	private $labelDontTilt;
+	protected $labelDontTilt;
 
 	/** @var bool|null 	Neklopit */
-	private $labelThisSideUp;
+	protected $labelThisSideUp;
 
 	/** @var bool|null 	Hydraulické čelo na nakládce */
-	private $hydraulicFrontLoading;
+	protected $hydraulicFrontLoading;
 
 	/** @var bool|null 	Hydraulické čelo na vykládce */
-	private $hydraulicFrontDischarge;
+	protected $hydraulicFrontDischarge;
 
 	/** @var int|null Počet euro palet */
-	private $numEpals;
+	protected $numEpals;
 
 	/** @var float Hmotnost zásilky */
-	private $kg;
+	protected $kg;
 
 	/** @var float|null Kubatura zásilky. Jsou-li vyplněny všechny rozměry (dimensions_d,s,v), spočítá se automaticky */
-	private $m3;
+	protected $m3;
 
 	/** @var string|null Poznámka na nakládce */
-	private $noteLoading;
+	protected $noteLoading;
 
 	/** @var string|null Poznámka na vykládce */
-	private $noteDischarge;
+	protected $noteDischarge;
 
 	/** @var float|null Hodnota zásilky */
-	private $orderValue;
+	protected $orderValue;
 
 	/** @var int|null Hodnota zásilky - ID měny (viz číselník) */
-	private $orderValueCurrencyId;
+	protected $orderValueCurrencyId;
 
 	/** @var Pack[] Obsah zásilky - kusy */
-	private $packs;
+	protected $packs;
 
 	/** @var Adr[]|null Definice ADR - přeprava nebezpečných látek */
-	private $adrs;
+	protected $adrs;
 
 	/**
 	 * @return int

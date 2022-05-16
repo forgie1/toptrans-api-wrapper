@@ -13,31 +13,31 @@ class OrderResponse extends Order
 {
 
 	/** @var int */
-	private $id;
+	protected $id;
 
 	/** @var string */
-	private $orderNumber;
+	protected $orderNumber;
 
 	/** @var string */
-	private $source;
+	protected $source;
 
 	/** @var bool */
-	private $labelsPrinted;
+	protected $labelsPrinted;
 
 	/** @var int */
-	private $quantitySum;
+	protected $quantitySum;
 
 	/** @var int|null */
-	private $pieceNumberFrom;
+	protected $pieceNumberFrom;
 
 	/** @var int[] */
-	private $pieceNumbers;
+	protected $pieceNumbers;
 
 	/** @var float */
-	private $deliveryPrice;
+	protected $deliveryPrice;
 
 	/** @var string */
-	private $deliveryCurrency;
+	protected $deliveryCurrency;
 
 	/**
 	 * @return int

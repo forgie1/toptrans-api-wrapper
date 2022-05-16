@@ -22,19 +22,19 @@ class Adr
 	const DESCRIPTION_MAX_LEN = 100;
 
 	/** @var int */
-	private $un;
+	protected $un;
 
 	/** @var int */
-	private $count;
+	protected $count;
 
 	/** @var float */
-	private $kg;
+	protected $kg;
 
 	/** @var string|null */
-	private $description;
+	protected $description;
 
 	/** @var boolean|null */
-	private $environmentDanger;
+	protected $environmentDanger;
 
 	/**
 	 * @return int

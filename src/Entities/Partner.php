@@ -13,28 +13,28 @@ class Partner
 {
 
 	/** @var string */
-	private $name;
+	protected $name;
 
 	/** @var string */
-	private $registrationCode;
+	protected $registrationCode;
 
 	/** @var string|null */
-	private $vatCode;
+	protected $vatCode;
 
 	/** @var string|null */
-	private $firstName;
+	protected $firstName;
 
 	/** @var string|null */
-	private $lastName;
+	protected $lastName;
 
 	/** @var string|null */
-	private $phone;
+	protected $phone;
 
 	/** @var string|null */
-	private $email;
+	protected $email;
 
 	/** @var Address */
-	private $address;
+	protected $address;
 
 	/**
 	 * @return string

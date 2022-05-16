@@ -19,22 +19,22 @@ class Pack
 	const DESCRIPTION_MAX_LEN = 100;
 
 	/** @var int */
-	private $packID;
+	protected $packID;
 
 	/** @var int */
-	private $quantity;
+	protected $quantity;
 
 	/** @var string|null */
-	private $description;
+	protected $description;
 
 	/** @var int|null probably in [cm]*/
-	private $dimensionsD;
+	protected $dimensionsD;
 
 	/** @var int|null probably in [cm]*/
-	private $dimensionsS;
+	protected $dimensionsS;
 
 	/** @var int|null probably in [cm]*/
-	private $dimensionsV;
+	protected $dimensionsV;
 
 	/**
 	 * @return int

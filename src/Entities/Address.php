@@ -13,25 +13,25 @@ class Address
 {
 
 	/** @var string */
-	private $city;
+	protected $city;
 
 	/** @var string|null */
-	private $cityPart;
+	protected $cityPart;
 
 	/**
 	 * @var string|null
 	 * can be including house number
 	 */
-	private $street;
+	protected $street;
 
 	/**
 	 * @var string|null
 	 * can be with descriptive number
 	 */
-	private $houseNum;
+	protected $houseNum;
 
 	/** @var string|null */
-	private $zip;
+	protected $zip;
 
 	/**
 	 * @return string

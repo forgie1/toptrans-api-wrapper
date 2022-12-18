@@ -115,7 +115,7 @@ class Address
 	 */
 	public function getZip(): ?string
 	{
-		return str_replace(' ', '', $this->zip);
+		return str_replace(' ', '', $this->zip ?? '');
 	}
 
 	/**

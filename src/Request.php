@@ -51,6 +51,7 @@ class Request
 	{
 		try {
 			$this->logger?->logg('auth data', [$this->username, $this->password]);
+			$this->logger?->logg('endpoint', [self::API_HOST . self::API_BASE_PATH . $methodPath]);
 			$this->logger?->logg('request data', $arrayData);
 
 			$client = new GuzzleHttp\Client(['base_uri' => self::API_HOST]);

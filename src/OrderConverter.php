@@ -8,6 +8,7 @@
 namespace ToptransApiWrapper;
 
 use ToptransApiWrapper\Entities\Adr;
+use ToptransApiWrapper\Entities\Order;
 use ToptransApiWrapper\Entities\Pack;
 use ToptransApiWrapper\Exceptions\ToptransApiWrapperException;
 
@@ -15,7 +16,7 @@ class OrderConverter
 {
 
 	/**
-	 * @param Object $order
+	 * @param Order $order
 	 * @param array $allowedParameters
 	 * @return array
 	 */

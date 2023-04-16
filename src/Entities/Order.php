@@ -1124,7 +1124,7 @@ class Order
 	 */
 	public function getM3(): ?float
 	{
-		return isset($this->m3) ? round($this->m3, 2) : null;
+		return isset($this->m3) ? round($this->m3, 2) : $this->calculateM3();
 	}
 
 	/**
@@ -1281,6 +1281,18 @@ class Order
 		if ($time && !preg_match('~^\d\d\:\d\d$~', $time)) {
 			throw new InvalidArgumentException('Time must by in the format hh:mm');
 		}
+	}
+
+	// ******* calculations
+
+	private function calculateM3(): ?float
+	{
+		$m3 = 0.0;
+		foreach ($this->packs as $pack) {
+			$m3 += $pack->getDimensionsS() * $pack->getDimensionsV() * $pack->getDimensionsD() / 1000000;
+		}
+
+		return $m3 ?: null;
 	}
 
 }

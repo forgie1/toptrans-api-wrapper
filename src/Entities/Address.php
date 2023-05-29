@@ -34,15 +34,10 @@ class Address
 	protected $zip;
 
 	/**
-	 * @return string
-	 * @throws InvalidArgumentException
+	 * @return string|null
 	 */
-	public function getCity(): string
+	public function getCity(): ?string
 	{
-		if (!$this->city) {
-			throw new InvalidArgumentException('Address city is mandatory');
-		}
-
 		return $this->city;
 	}
 

@@ -43,7 +43,7 @@ class Adr
 	public function getUn(): int
 	{
 		if (!$this->un) {
-			throw new InvalidArgumentException('Address city is mandatory');
+			throw new InvalidArgumentException('Addr "un" is mandatory');
 		}
 		return $this->un;
 	}
@@ -66,7 +66,7 @@ class Adr
 	public function getCount(): int
 	{
 		if (!$this->count) {
-			throw new InvalidArgumentException('Address city is mandatory');
+			throw new InvalidArgumentException('Adr "Count" is mandatory');
 		}
 		return $this->count;
 	}
@@ -93,7 +93,7 @@ class Adr
 	public function getKg(): float
 	{
 		if (!$this->kg) {
-			throw new InvalidArgumentException('Address city is mandatory');
+			throw new InvalidArgumentException('Addr "Kg" is mandatory');
 		}
 		return $this->kg;
 	}

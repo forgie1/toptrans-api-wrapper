@@ -16,7 +16,7 @@ abstract class ToptransResponse
 	/** @var string */
 	private $status;
 
-	/** @var string */
+	/** @var string[] */
 	private $errors = [];
 
 	/** @var array */

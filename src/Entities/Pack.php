@@ -105,7 +105,7 @@ class Pack
 		return $this;
 	}
 
-	/**
+	/** dimension in cm
 	 * @return int|null
 	 */
 	public function getDimensionsD(): ?int
@@ -113,17 +113,17 @@ class Pack
 		return $this->dimensionsD;
 	}
 
-	/**
+	/** dimension in cm
 	 * @param int|null $dimensionsD
 	 * @return $this
 	 */
 	public function setDimensionsD($dimensionsD)
 	{
-		$this->dimensionsD = $dimensionsD;
+		$this->dimensionsD = $dimensionsD ?: null;
 		return $this;
 	}
 
-	/**
+	/** dimension in cm
 	 * @return int|null
 	 */
 	public function getDimensionsS(): ?int
@@ -131,17 +131,17 @@ class Pack
 		return $this->dimensionsS;
 	}
 
-	/**
+	/** dimension in cm
 	 * @param int|null $dimensionsS
 	 * @return $this
 	 */
 	public function setDimensionsS($dimensionsS)
 	{
-		$this->dimensionsS = $dimensionsS;
+		$this->dimensionsS = $dimensionsS ?: null;
 		return $this;
 	}
 
-	/**
+	/** dimension in cm
 	 * @return int|null
 	 */
 	public function getDimensionsV(): ?int
@@ -149,13 +149,13 @@ class Pack
 		return $this->dimensionsV;
 	}
 
-	/**
+	/** dimension in cm
 	 * @param int|null $dimensionsV
 	 * @return $this
 	 */
 	public function setDimensionsV($dimensionsV)
 	{
-		$this->dimensionsV = $dimensionsV;
+		$this->dimensionsV = $dimensionsV ?: null;
 		return $this;
 	}
 

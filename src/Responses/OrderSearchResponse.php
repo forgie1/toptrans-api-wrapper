@@ -24,15 +24,15 @@ class OrderSearchResponse extends ToptransResponse
 	protected function parseRawData($data)
 	{
 		$this->orderState = new OrderState(
-			$data['orderNumber'] ?? null,
-			$data['loadingDate'] ?? null,
-			$data['itemFrom'] ?? null,
-			$data['itemTo'] ?? null,
-			$data['label'] ?? null,
-			$data['deliveryBranch'] ?? null,
-			$data['deliveryDriver'] ?? null,
-			$data['deliveryDate'] ?? null,
-			$data['status'] ?? null,
+			$data[0]['orderNumber'] ?? null,
+			$data[0]['loadingDate'] ?? null,
+			$data[0]['itemFrom'] ?? null,
+			$data[0]['itemTo'] ?? null,
+			$data[0]['label'] ?? null,
+			$data[0]['deliveryBranch'] ?? null,
+			$data[0]['deliveryDriver'] ?? null,
+			$data[0]['deliveryDate'] ?? null,
+			$data[0]['status'] ?? null,
 		);
 	}
 

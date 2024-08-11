@@ -32,13 +32,13 @@ class OrderState implements TTEntity
 
 	public ?string $item;	// --- only request (optional)
 
-	public function __construct(?string $orderNumber = null, ?string $loadingDate = null, ?string $itemFrom = null, ?string $itemTo = null, ?string $label = null, ?string $deliveryBranch = null, ?string $deliveryDriver = null, ?string $deliveryDate = null, ?string $status = null, ?string $item = null)
+	public function __construct(null|string|int $orderNumber = null, ?string $loadingDate = null, null|int|string $itemFrom = null, null|int|string $itemTo = null, null|int|string $label = null, ?string $deliveryBranch = null, ?string $deliveryDriver = null, ?string $deliveryDate = null, ?string $status = null, ?string $item = null)
 	{
-		$this->orderNumber = $orderNumber;
+		$this->orderNumber = $orderNumber ? (string)$orderNumber : null;
 		$this->loadingDate = $loadingDate;
-		$this->itemFrom = $itemFrom;
-		$this->itemTo = $itemTo;
-		$this->label = $label;
+		$this->itemFrom = $itemFrom ? (string)$itemFrom : null;
+		$this->itemTo = $itemTo ? (string)$itemTo : null;
+		$this->label = $label ? (string)$label : null;
 		$this->deliveryBranch = $deliveryBranch;
 		$this->deliveryDriver = $deliveryDriver;
 		$this->deliveryDate = $deliveryDate;

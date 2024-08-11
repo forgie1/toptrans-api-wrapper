@@ -16,7 +16,7 @@ class OrderSearchMethod extends TTMethodA
 
 	const REQUEST_PATH = '/order/search';
 
-	const ALLOWED_PARAMETERS = ['orderNumber', 'itemNumber', 'label'];
+	const ALLOWED_PARAMETERS = ['orderNumber' => 'orderNumber', 'itemNumber' => 'itemNumber', 'label' => 'label'];
 
 	public function __construct(OrderState|TTEntity $entity)
 	{

@@ -20,7 +20,7 @@ class OrderConverter
 	 * @param array $allowedParameters
 	 * @return array
 	 */
-	public static function orderToArray($order, array $allowedParameters): array
+	public static function orderToArray(Order $order, array $allowedParameters): array
 	{
 		$arrayOrder = [];
 		foreach ($allowedParameters as $parameter) {

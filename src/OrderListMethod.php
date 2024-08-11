@@ -7,7 +7,10 @@
 
 namespace ToptransApiWrapper;
 
-use ToptransApiWrapper\Responses;
+use ToptransApiWrapper\Exceptions\BadResponseException;
+use ToptransApiWrapper\Exceptions\ResponseStatusException;
+use ToptransApiWrapper\Responses\OrderListResponse;
+use ToptransApiWrapper\Responses\ToptransResponse;
 
 class OrderListMethod extends OrderMethod
 {
@@ -20,11 +23,11 @@ class OrderListMethod extends OrderMethod
 
 	/**
 	 * @param Request $request
-	 * @return Responses\OrderListResponse
-	 * @throws Exceptions\BadResponseException
-	 * @throws Exceptions\ResponseStatusException
+	 * @return OrderListResponse
+	 * @throws BadResponseException
+	 * @throws ResponseStatusException
 	 */
-	public function sendRequest(Request $request): Responses\OrderListResponse
+	public function sendRequest(Request $request): OrderListResponse
 	{
 		$response = parent::sendRequest($request);
 		return new Responses\OrderListResponse($response);

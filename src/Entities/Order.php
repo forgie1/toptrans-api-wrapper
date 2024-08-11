@@ -19,8 +19,9 @@ use ToptransApiWrapper\Constants\PayerTypes;
 use ToptransApiWrapper\Constants\ReturnPackTypes;
 use ToptransApiWrapper\Exceptions\InvalidArgumentException;
 use ToptransApiWrapper\Exceptions\ToptransApiWrapperException;
+use ToptransApiWrapper\OrderConverter;
 
-class Order
+class Order implements TTEntity
 {
 
 	const TWO_WAY_SHIPMENT_DESCRIPTION_MAX_LENGTH = 50;
@@ -189,6 +190,11 @@ class Order
 
 	/** @var Adr[]|null Definice ADR - přeprava nebezpečných látek */
 	protected $adrs;
+
+	public function toArray(array $allowedParameters = []): array
+	{
+		return OrderConverter::orderToArray($this, $allowedParameters);
+	}
 
 	/**
 	 * @return int

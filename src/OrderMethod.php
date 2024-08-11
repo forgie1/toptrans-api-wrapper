@@ -8,28 +8,21 @@
 namespace ToptransApiWrapper;
 
 use ToptransApiWrapper\Entities\Order;
+use ToptransApiWrapper\Responses\ToptransResponse;
 
-abstract class OrderMethod
+abstract class OrderMethod extends TTMethodA
 {
-
-	/** @var Order */
-	protected $order;
-
-	public function __construct(Order $order)
-	{
-		$this->order = $order;
-	}
 
 	/**
 	 * @param Request $request
 	 * @throws Exceptions\BadResponseException
 	 * @throws Exceptions\ResponseStatusException
-	 * @return array
+	 * @return ToptransResponse|array
 	 */
-	public function sendRequest(Request $request)
+	public function sendRequest(Request $request): ToptransResponse|array
 	{
 		try {
-			return $request->sendRequest(OrderConverter::orderToArray($this->order, $this->getAllowedParameters()), $this->getRequestPath());
+			return $request->sendRequest($this->getTTEntity()->toArray($this->getAllowedParameters()), $this->getRequestPath());
 		} catch (\ToptransApiWrapper\Exceptions\InvalidArgumentException $e) {
 			return [
 				'errors' => [
@@ -37,6 +30,11 @@ abstract class OrderMethod
 				],
 			];
 		}
+	}
+
+	public function getTTEntity(): Order
+	{
+		return $this->entity;
 	}
 
 	abstract protected function getRequestPath(): string;
